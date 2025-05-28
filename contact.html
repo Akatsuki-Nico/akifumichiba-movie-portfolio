@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | AKIFUMI CHIBA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="contact-page">
+    <header>
+        <div class="container">
+            <h1 class="logo"><a href="index.html">AKIFUMI CHIBA</a></h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="music-videos.html">MUSIC VIDEO</a></li>
+                    <li><a href="pr-videos.html">PR VIDEO</a></li>
+                    <li><a href="talk-videos.html">TALK VIDEO</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="contact.html" class="active">CONTACT</a></li>
+                </ul>
+            </nav>
+            <button class="hamburger-menu" aria-label="メニューを開く" aria-expanded="false">
+                <span class="hamburger-menu-bar"></span>
+                <span class="hamburger-menu-bar"></span>
+                <span class="hamburger-menu-bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <main class="contact-main">
+        <section class="contact-hero" id="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>CONTACT</h2>
+                    <p>映像制作のご依頼・ご相談はこちらから<br>あなたのビジョンを映像で表現するお手伝いをいたします</p>
+                    <a href="#contact-form-section" class="cta-button">
+                        <i class="fas fa-envelope"></i>
+                        お問い合わせフォーム
+                    </a>
+                </div>
+            </div>
+            <div class="scroll-down-indicator">
+                <a href="#contact-form-section">
+                    <span></span>
+                    SCROLL
+                </a>
+            </div>
+        </section>
+
+        <section class="contact-form-section" id="contact-form-section">
+            <div class="container">
+                <div class="contact-content-single">
+                    <div class="contact-intro">
+                        <h2>お気軽にお問い合わせください</h2>
+                        <p>あなたのビジョンを映像で表現するお手伝いをさせていただきます。プロジェクトの詳細やご希望をお聞かせください。</p>
+                    </div>
+
+                    <div class="contact-form">
+                        <form id="contactForm" method="POST">
+                            <div class="form-group">
+                                <label for="name">お名前 <span class="required">*</span></label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">メールアドレス <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="company">会社名・団体名</label>
+                                <input type="text" id="company" name="company">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="project-type">プロジェクトタイプ <span class="required">*</span></label>
+                                <select id="project-type" name="project-type" required>
+                                    <option value="">選択してください</option>
+                                    <option value="music-video">ミュージックビデオ</option>
+                                    <option value="pr-video">PR映像</option>
+                                    <option value="talk-video">トーク映像</option>
+                                    <option value="live-streaming">ライブ配信サポート</option>
+                                    <option value="other">その他</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="budget">予算</label>
+                                <select id="budget" name="budget">
+                                    <option value="">選択してください</option>
+                                    <option value="under-100k">10万円未満</option>
+                                    <option value="100k-300k">10万円〜30万円</option>
+                                    <option value="300k-500k">30万円〜50万円</option>
+                                    <option value="500k-1m">50万円〜100万円</option>
+                                    <option value="over-1m">100万円以上</option>
+                                    <option value="discuss">要相談</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="timeline">希望納期</label>
+                                <select id="timeline" name="timeline">
+                                    <option value="">選択してください</option>
+                                    <option value="urgent">1週間以内（緊急）</option>
+                                    <option value="2weeks">2週間以内</option>
+                                    <option value="1month">1ヶ月以内</option>
+                                    <option value="2months">2ヶ月以内</option>
+                                    <option value="3months">3ヶ月以内</option>
+                                    <option value="flexible">柔軟に対応可能</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="reference">参考映像・イメージ</label>
+                                <textarea id="reference" name="reference" rows="3" placeholder="参考にしたい映像のURL、イメージの説明など"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">プロジェクト詳細・ご希望 <span class="required">*</span></label>
+                                <textarea id="message" name="message" rows="6" placeholder="プロジェクトの詳細、ご希望、目的、ターゲット層など、できるだけ詳しくお聞かせください。" required></textarea>
+                            </div>
+
+                            <div class="form-group checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="privacy" required>
+                                    <span class="checkmark"></span>
+                                    <a href="privacy-policy.html" target="_blank">プライバシーポリシー</a>に同意します <span class="required">*</span>
+                                </label>
+                            </div>
+
+                            <div class="form-submit">
+                                <button type="submit" class="submit-button">
+                                    <i class="fas fa-paper-plane"></i>
+                                    送信する
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-faq">
+            <div class="container">
+                <h2>よくあるご質問</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h3>Q. 制作期間はどのくらいですか？</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>A. プロジェクトの規模により異なりますが、通常2週間〜2ヶ月程度です。詳細はお打ち合わせ時にご相談させていただきます。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h3>Q. 遠方からの依頼も可能ですか？</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>A. はい、可能です。遠方の場合は編集のみの対応となります。オンラインでのお打ち合わせも承っております。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h3>Q. 修正は何回まで可能ですか？</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>A. 基本的に2回まで修正対応いたします（無料）。大幅な変更や3回目以降の修正は別途料金が発生する場合があります。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h3>Q. 著作権について教えてください</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>A. 制作した映像の著作権については、プロジェクトの内容や契約条件により異なります。詳細はお打ち合わせ時にご相談させていただきます。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h3>Q. 料金の支払い方法は？</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>A. 銀行振込での対応となります。プロジェクト開始前に50%、完成・納品時に残り50%のお支払いをお願いしております。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h3>Q. 急ぎの案件にも対応できますか？</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>A. スケジュールによりますが、可能な限り対応いたします。急ぎの場合は追加料金が発生する場合があります。まずはお気軽にご相談ください。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFaq(this)">
+                            <h3>Q. 撮影機材はどのようなものを使用しますか？</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>A. プロ仕様の4Kカメラ、各種レンズ、照明機材、音響機材を使用しています。プロジェクトに応じて最適な機材を選定いたします。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© <span id="current-year"></span> AKIFUMI CHIBA. All Rights Reserved.</p>
+            <p>お問い合わせは上記フォームをご利用ください</p>
+            <div class="social-links">
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/contact.js"></script>
+    <script>
+        function toggleFaq(element) {
+            const faqItem = element.parentElement;
+            const answer = faqItem.querySelector('.faq-answer');
+            const icon = element.querySelector('i');
+            
+            // Close all other FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                if (item !== faqItem) {
+                    item.classList.remove('active');
+                    item.querySelector('.faq-answer').style.maxHeight = '0';
+                    item.querySelector('i').style.transform = 'rotate(0deg)';
+                }
+            });
+            
+            // Toggle current FAQ item
+            faqItem.classList.toggle('active');
+            
+            if (faqItem.classList.contains('active')) {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                answer.style.maxHeight = '0';
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+    </script>
+    <!-- Stagewise Toolbar (Development Only) -->
+    <script src="js/stagewise-dev.js"></script>
+</body>
+</html> 

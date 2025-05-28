@@ -1,0 +1,24 @@
+{
+  "name": "akifumi-portfolio",
+  "version": "1.0.0",
+  "description": "Akifumi Chiba Video Production Portfolio Site",
+  "main": "index.html",
+  "scripts": {
+    "dev": "./node_modules/.bin/http-server -p 3001 -c-1 --cors",
+    "start": "./node_modules/.bin/http-server -p 8080",
+    "build": "echo 'No build process for static site'",
+    "stagewise": "npm run dev"
+  },
+  "keywords": [
+    "portfolio",
+    "video",
+    "production",
+    "stagewise"
+  ],
+  "author": "Akifumi Chiba",
+  "license": "ISC",
+  "devDependencies": {
+    "@stagewise/toolbar": "^0.2.1",
+    "http-server": "^14.1.1"
+  }
+}

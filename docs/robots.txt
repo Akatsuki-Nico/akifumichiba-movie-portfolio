@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://akifumichiba.com/sitemap.xml
+
+# Disallow specific files if needed
+# Disallow: /private/
+# Disallow: /temp/ 
