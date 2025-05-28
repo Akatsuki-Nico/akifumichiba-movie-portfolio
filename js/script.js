@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log("AKIFUMI CHIBA Portfolio - Enhanced Version Loaded");
-    
+
     // === Core Elements ===
     const loaderWrapper = document.getElementById('loader-wrapper');
     const pageContent = document.getElementById('page-content');
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // === Check if this is the index page ===
     const isIndexPage = window.location.pathname === '/' || window.location.pathname.includes('index.html') || window.location.pathname === '';
-    
+
     // === Performance Optimization ===
     let ticking = false;
     let lastScrollTop = 0;
@@ -179,47 +179,47 @@ document.addEventListener('DOMContentLoaded', () => {
         // Internal navigation links
         const internalLinks = document.querySelectorAll('a[href^="#"]');
         internalLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
                 const targetId = this.getAttribute('href');
                 
-                if (targetId === '#' || targetId === '#top') {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    updateActiveNav(this);
-                    return;
-                }
+            if (targetId === '#' || targetId === '#top') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                updateActiveNav(this);
+                return;
+            }
                 
                 const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    const elementPosition = targetElement.getBoundingClientRect().top;
+            if (targetElement) {
+                const elementPosition = targetElement.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - currentHeaderHeight - 20;
                     
-                    window.scrollTo({ top: offsetPosition, behavior: "smooth" });
-                    updateActiveNav(this);
-                }
-            });
+                window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                updateActiveNav(this);
+            }
         });
+    });
 
         // Active navigation highlighting
-        function updateActiveNav(clickedLink) {
-            if (clickedLink && clickedLink.closest('nav')) {
+    function updateActiveNav(clickedLink) {
+        if (clickedLink && clickedLink.closest('nav')) {
                 navLinks.forEach(nav => nav.classList.remove('active'));
-                clickedLink.classList.add('active');
-            }
+            clickedLink.classList.add('active');
         }
+    }
 
         // Scroll-based active navigation
         const sections = document.querySelectorAll('main section[id], footer[id]');
-        window.addEventListener('scroll', () => {
-            let currentSectionId = '';
+    window.addEventListener('scroll', () => {
+        let currentSectionId = '';
             const scrollBuffer = 100;
 
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - currentHeaderHeight - scrollBuffer;
-                if (pageYOffset >= sectionTop) {
-                    currentSectionId = section.getAttribute('id');
-                }
-            });
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - currentHeaderHeight - scrollBuffer;
+            if (pageYOffset >= sectionTop) {
+                currentSectionId = section.getAttribute('id');
+            }
+        });
 
             navLinks.forEach(link => {
                 link.classList.remove('active');

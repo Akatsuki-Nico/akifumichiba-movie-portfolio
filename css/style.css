@@ -43,12 +43,12 @@
 }
 
 @keyframes fadeIn {
-    from { 
-        opacity: 0; 
+    from {
+        opacity: 0;
         transform: scale(0.95);
     }
-    to { 
-        opacity: 1; 
+    to {
+        opacity: 1;
         transform: scale(1);
     }
 }
@@ -284,7 +284,7 @@ img {
     border-radius: 15px;
     position: relative;
     margin-bottom: 30px;
-    opacity: 0;
+        opacity: 0; 
     animation: logoReveal 1.2s ease forwards 0.5s;
     box-shadow: var(--shadow-md);
 }
@@ -330,7 +330,7 @@ img {
         filter: blur(5px);
     }
     100% { 
-        opacity: 1;
+        opacity: 1; 
         transform: scale(1) rotateY(0deg);
         filter: blur(0);
     }
@@ -342,7 +342,7 @@ img {
     color: var(--accent-color); 
     margin-bottom: 30px; 
     letter-spacing: 3px; 
-    opacity: 0;
+        opacity: 0; 
     position: relative;
     white-space: nowrap;
     overflow: hidden;
@@ -414,7 +414,7 @@ img {
 }
 
 .loader-line { 
-    width: 0; 
+        width: 0; 
     height: 3px; 
     background: var(--accent-color);
     border-radius: 2px;
@@ -805,7 +805,7 @@ header .logo a:hover::after {
     animation: scrollPulse 2.5s ease-in-out infinite !important;
 }
 
-@keyframes scrollPulse {
+@keyframes scrollPulse { 
     0%, 100% { 
         opacity: 0.5;
         transform: scaleY(0.8);
@@ -893,7 +893,7 @@ main {
 
 @keyframes cardEnhanced {
     0% {
-        opacity: 0;
+    opacity: 0;
         transform: translateY(30px) scale(0.95);
     }
     60% {
@@ -1044,7 +1044,7 @@ main {
 }
 
 .modern-button:hover i {
-    transform: translateX(5px);
+    transform: translateX(5px); 
 }
 
 /* About & Contact ページ専用スタイル */
@@ -1073,7 +1073,7 @@ main {
 }
 
 .profile-left {
-    text-align: center;
+    text-align: center; 
     animation: slideInLeft 0.8s ease forwards;
 }
 
@@ -1104,7 +1104,7 @@ main {
 
 .profile-title {
     font-size: 1.1em;
-    color: var(--text-color-light);
+    color: var(--text-color-light); 
     margin-bottom: 30px;
     font-weight: 500;
 }
@@ -1207,7 +1207,7 @@ main {
 .stat-item::before {
     content: '';
     position: absolute;
-    top: 0;
+        top: 0;
     left: 0;
     width: 100%;
     height: 2px;
@@ -1257,10 +1257,10 @@ main {
     margin-bottom: 60px;
     color: var(--accent-color);
     display: flex;
-    align-items: center;
+        align-items: center;
     justify-content: center;
-    gap: 20px;
-}
+        gap: 20px;
+    }
 
 .about-section h3 i {
     font-size: 0.8em;
@@ -1406,7 +1406,7 @@ main {
 
 .submit-button {
     font-family: var(--title-font);
-    font-size: 1.1em;
+        font-size: 1.1em;
     font-weight: 700;
     background: var(--accent-color);
     color: var(--base-bg-color);
@@ -1650,16 +1650,16 @@ footer a:hover {
 
 /* レスポンシブの修正 */
 @media (max-width: 992px) {
-    .profile-section .container {
+.profile-section .container {
         grid-template-columns: 1fr;
         gap: 40px;
         text-align: center;
     }
     
     .profile-right {
-        text-align: center;
-    }
-    
+    text-align: center;
+}
+
     .profile-stats {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -1721,9 +1721,9 @@ footer a:hover {
     }
 
     .main-nav ul {
-        flex-direction: column;
+    flex-direction: column;
         align-items: center;
-        gap: 15px;
+    gap: 15px;
         padding: 20px 30px;
         background: transparent;
         border: none;
@@ -1799,8 +1799,8 @@ footer a:hover {
     }
     
     .profile-highlights {
-        align-items: center;
-        justify-content: center;
+    align-items: center;
+    justify-content: center;
         width: 100%;
         max-width: 300px;
         margin: 0 auto;
@@ -1817,9 +1817,9 @@ footer a:hover {
         width: 100% !important;
         margin: 0 auto !important;
         display: flex !important;
-    }
-    
-    .highlight-item i {
+}
+
+.highlight-item i {
         margin-bottom: 5px !important;
         font-size: 1.2em !important;
         min-width: auto !important;
@@ -1913,9 +1913,9 @@ footer a:hover {
     
     .profile-basic-info h3 {
         font-size: 1.6em;
-    }
-    
-    .skill-item {
+}
+
+.skill-item {
         padding: 20px;
     }
     
