@@ -10,7 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link, .main-nav a');
 
     // === Check if this is the index page ===
-    const isIndexPage = window.location.pathname === '/' || window.location.pathname.includes('index.html') || window.location.pathname === '';
+    const pathname = window.location.pathname;
+    const isIndexPage = pathname === '/' || 
+                       pathname.includes('index.html') || 
+                       pathname === '' ||
+                       pathname.endsWith('/') ||
+                       (pathname.split('/').filter(segment => segment).length <= 1);
 
     // === Performance Optimization ===
     let ticking = false;
