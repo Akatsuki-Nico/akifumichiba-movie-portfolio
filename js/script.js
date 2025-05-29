@@ -31,12 +31,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // === Enhanced Loader Creation (only for index page) ===
     function createEnhancedLoader() {
         if (!loaderWrapper || !isIndexPage) return;
-
+                        
         // Check if loader content already exists
         if (loaderWrapper.querySelector('.film-strip')) {
             console.log("Loader content already exists");
             return;
-        }
+                }
 
         loaderWrapper.innerHTML = `
             <div class="loader-content">
@@ -54,13 +54,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!header) return;
         
         const scrollThreshold = 100;
+        const sections = document.querySelectorAll('main section[id], footer[id]');
+        const currentHeaderHeight = header ? header.offsetHeight : 80;
 
+        // 統合されたスクロールハンドラー
         window.addEventListener('scroll', () => {
             if (!ticking) {
                 requestAnimationFrame(() => {
                     const scrollTop = window.pageYOffset;
                     const scrollDirection = scrollTop > lastScrollTop ? 'down' : 'up';
                     
+                    // ヘッダーアニメーション
                     if (scrollTop > scrollThreshold) {
                         header.classList.add('scrolled');
                     
@@ -76,81 +80,83 @@ document.addEventListener('DOMContentLoaded', () => {
                         isHeaderVisible = true;
                     }
                     
+                    // ナビゲーション更新（統合）
+                    let currentSectionId = '';
+                    const scrollBuffer = 100;
+
+                    sections.forEach(section => {
+                        const sectionTop = section.offsetTop - currentHeaderHeight - scrollBuffer;
+                        if (scrollTop >= sectionTop) {
+                            currentSectionId = section.getAttribute('id');
+                        }
+                    });
+
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${currentSectionId}`) {
+                            link.classList.add('active');
+                    }
+                    });
+                    
                     lastScrollTop = scrollTop;
                     ticking = false;
                 });
                 ticking = true;
             }
-        });
+        }, { passive: true }); // passive: true でスクロール性能向上
     }
 
-    // === Enhanced Card Animations ===
+    // === 超軽量カードアニメーション（ユーザビリティ最優先） ===
     function initCardAnimations() {
         const cards = document.querySelectorAll('.mv-card, .skill-item, .service-item, .stat-item, .highlight-item');
         if (cards.length === 0) return;
 
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('in-view');
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                        entry.target.style.transitionDelay = `${(index % 3) * 0.1}s`;
-                    }, index * 50);
+                    // 遅延なしで即座に表示
+                    entry.target.classList.add('in-view');
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                     observer.unobserve(entry.target);
                 }
             });
         }, {
             threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px"
+            rootMargin: "0px 0px -20px 0px" // より早くトリガー
         });
 
         cards.forEach(card => {
             if (!card.style.opacity) {
                 card.style.opacity = '0';
-                card.style.transform = 'translateY(30px)';
-                card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                card.style.transform = 'translateY(15px)'; // 20px → 15px でより軽く
+                card.style.transition = 'all 0.3s ease'; // シンプルなeaseに変更、0.4s → 0.3s
             }
             observer.observe(card);
         });
     }
 
-    // === 3D Magnetic Effects ===
+    // === 軽量ホバーエフェクト（3D削除、ユーザビリティ重視） ===
     function initMagneticEffects() {
         const magneticElements = document.querySelectorAll('.cta-button, .modern-button, .mv-card, .submit-button');
         
         magneticElements.forEach(element => {
+            // シンプルなホバーエフェクトのみ
             element.addEventListener('mouseenter', () => {
-                element.style.transform = 'translateY(-5px) scale(1.02)';
-                element.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                element.style.transform = 'translateY(-3px)'; // 軽量化：-5px → -3px
+                element.style.transition = 'transform 0.2s ease'; // 高速化：0.3s → 0.2s
             });
 
             element.addEventListener('mouseleave', () => {
                 element.style.transform = '';
-                element.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                element.style.transition = 'transform 0.2s ease';
             });
 
-            // 3D card effects
-            if (element.classList.contains('mv-card')) {
-                element.addEventListener('mousemove', (e) => {
-                    const rect = element.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    
-                    const rotateX = (y - centerY) / 8;
-                    const rotateY = (centerX - x) / 8;
-                    
-                    element.style.transform = `translateY(-8px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-                });
-            }
+            // 3Dエフェクトは完全に削除（mousemoveイベント削除）
         });
     }
 
-    // === Advanced Scroll Animations ===
+    // === 超軽量スクロールアニメーション（ユーザビリティ最優先） ===
     function initScrollAnimations() {
         const animatedElements = document.querySelectorAll('.section-title, .hero-content h2, .hero-content p, .cta-button, .profile-description, .contact-intro');
         
@@ -163,18 +169,86 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }, {
-            threshold: 0.3,
-            rootMargin: '0px 0px -100px 0px'
+            threshold: 0.1, // 0.2 → 0.1 でさらに早くトリガー
+            rootMargin: '0px 0px -30px 0px' // -50px → -30px で軽く
         });
 
-        animatedElements.forEach((element, index) => {
+        animatedElements.forEach((element) => {
             if (!element.style.opacity) {
                 element.style.opacity = '0';
-                element.style.transform = 'translateY(40px)';
-                element.style.transition = `all 0.8s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
+                element.style.transform = 'translateY(20px)'; // 25px → 20px で軽く
+                element.style.transition = 'all 0.4s ease'; // シンプルなease、遅延削除
             }
             observer.observe(element);
         });
+    }
+
+    // === かっこいいヒーローアニメーション ===
+    function initHeroAnimations() {
+        const heroContent = document.querySelector('.hero-content');
+        if (!heroContent || !isIndexPage) return;
+
+        // ヒーロー要素を取得
+        const heroTitle = heroContent.querySelector('h1');
+        const heroSubtitle = heroContent.querySelector('p');
+        const heroButton = heroContent.querySelector('.cta-button');
+
+        // 初期状態を設定
+        [heroTitle, heroSubtitle, heroButton].forEach(el => {
+            if (el) {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(50px)';
+            }
+        });
+
+        // 順次アニメーション実行
+        setTimeout(() => {
+            // タイトルのアニメーション
+            if (heroTitle) {
+                heroTitle.style.transition = 'all 1s cubic-bezier(0.4, 0, 0.2, 1)';
+                heroTitle.style.opacity = '1';
+                heroTitle.style.transform = 'translateY(0)';
+                
+                // タイピングエフェクト風の文字表示
+                const text = heroTitle.textContent;
+                heroTitle.textContent = '';
+                let i = 0;
+                const typeEffect = setInterval(() => {
+                    heroTitle.textContent += text.charAt(i);
+                    i++;
+                    if (i >= text.length) {
+                        clearInterval(typeEffect);
+                    }
+                }, 100);
+            }
+
+            // サブタイトルのアニメーション（0.5秒遅れ）
+            setTimeout(() => {
+                if (heroSubtitle) {
+                    heroSubtitle.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                    heroSubtitle.style.opacity = '1';
+                    heroSubtitle.style.transform = 'translateY(0)';
+                }
+            }, 500);
+
+            // ボタンのアニメーション（1秒遅れ）
+            setTimeout(() => {
+                if (heroButton) {
+                    heroButton.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                    heroButton.style.opacity = '1';
+                    heroButton.style.transform = 'translateY(0) scale(1)';
+                    
+                    // バウンスエフェクト
+                    setTimeout(() => {
+                        heroButton.style.transform = 'translateY(0) scale(1.05)';
+                        setTimeout(() => {
+                            heroButton.style.transform = 'translateY(0) scale(1)';
+                        }, 200);
+                    }, 100);
+                }
+            }, 1000);
+
+        }, 200); // ページ読み込み後少し待ってから開始
     }
 
     // === Smooth Navigation ===
@@ -212,27 +286,6 @@ document.addEventListener('DOMContentLoaded', () => {
             clickedLink.classList.add('active');
         }
     }
-
-        // Scroll-based active navigation
-        const sections = document.querySelectorAll('main section[id], footer[id]');
-    window.addEventListener('scroll', () => {
-        let currentSectionId = '';
-            const scrollBuffer = 100;
-
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - currentHeaderHeight - scrollBuffer;
-            if (pageYOffset >= sectionTop) {
-                currentSectionId = section.getAttribute('id');
-            }
-        });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${currentSectionId}`) {
-                    link.classList.add('active');
-                }
-            });
-        });
     }
 
     // === Mobile Menu ===
@@ -296,8 +349,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Toggle current item
                 if (!isActive) {
                     faqItem.classList.add('active');
-                }
-            });
+        }
+    });
         });
     }
 
@@ -322,6 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
             initSmoothNavigation();
             initMobileMenu();
             initFAQ();
+            initHeroAnimations();
         }, 200);
     }
 
@@ -387,7 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     console.log("All enhanced features initialized successfully for", isIndexPage ? "index page" : "other page");
-});
+    });
 
 // === Global FAQ Toggle Function (for contact page) ===
 function toggleFaq(element) {

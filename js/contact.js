@@ -111,7 +111,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Check privacy policy agreement
-        if (!data.privacy) {
+        const privacyCheckbox = document.querySelector('input[name="privacy"]');
+        if (!privacyCheckbox || !privacyCheckbox.checked) {
             showFieldError('privacy', 'プライバシーポリシーに同意してください');
             isValid = false;
         }
@@ -127,26 +128,34 @@ document.addEventListener('DOMContentLoaded', function() {
     function showFieldError(fieldName, message = '必須項目です') {
         const field = document.getElementById(fieldName) || document.querySelector(`[name="${fieldName}"]`);
         if (field) {
-            field.style.borderColor = '#ff4444';
+            // Add error class for CSS styling
+            field.classList.add('error');
+            const formGroup = field.closest('.form-group');
+            if (formGroup) {
+                formGroup.classList.add('error');
+            }
             
             // Create error message element
             const errorElement = document.createElement('div');
             errorElement.className = 'error-message';
             errorElement.textContent = message;
-            errorElement.style.color = '#ff4444';
-            errorElement.style.fontSize = '0.9em';
-            errorElement.style.marginTop = '5px';
             
-            // Insert error message after the field
-            field.parentNode.appendChild(errorElement);
+            // Insert error message after the field or form group
+            const insertAfter = formGroup || field.parentNode;
+            insertAfter.appendChild(errorElement);
         }
     }
     
     function clearErrorStates() {
-        // Remove error styling
+        // Remove error classes and styling
         const fields = contactForm.querySelectorAll('input, select, textarea');
         fields.forEach(field => {
-            field.style.borderColor = '';
+            field.classList.remove('error');
+        });
+        
+        const formGroups = contactForm.querySelectorAll('.form-group');
+        formGroups.forEach(group => {
+            group.classList.remove('error');
         });
         
         // Remove error messages

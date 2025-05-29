@@ -3,15 +3,16 @@
     --primary-font: 'Roboto', sans-serif;
     --title-font: 'Orbitron', sans-serif;
     --base-bg-color: #000000;
-    --secondary-bg-color: #111111;
+    --secondary-bg-color: #0a0a0a; /* より深い黒 */
     --dark-bg-color: #000000;
-    --card-bg-color-glass: rgba(255, 255, 255, 0.05);
-    --card-bg-color-solid: #111111;
+    --card-bg-color-glass: rgba(0, 255, 255, 0.08); /* サイバーパンクなカードカラー */
+    --card-bg-color-solid: #0d0d0d; /* サイバーパンクな背景 */
     --text-color: #ffffff;
     --text-color-light: #cccccc;
     --text-color-dark: #888888;
     --accent-color: #00CCCC;
     --accent-color-darker: #00AAAA;
+    --accent-secondary: #ff0080; /* サイバーパンクなピンク */
     --border-color: rgba(0, 204, 204, 0.3);
     --shadow-color: rgba(0, 204, 204, 0.5);
     --header-height: 80px;
@@ -23,11 +24,11 @@
     --slow-transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     --bounce-transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     
-    /* 改善されたシャドウ */
-    --shadow-sm: 0 2px 8px rgba(0, 204, 204, 0.12);
-    --shadow-md: 0 4px 16px rgba(0, 204, 204, 0.18);
-    --shadow-lg: 0 8px 32px rgba(0, 204, 204, 0.25);
-    --shadow-xl: 0 12px 48px rgba(0, 204, 204, 0.35);
+    /* サイバーパンクなシャドウ */
+    --shadow-sm: 0 2px 8px rgba(0, 204, 204, 0.12), 0 0 15px rgba(0, 204, 204, 0.1);
+    --shadow-md: 0 4px 16px rgba(0, 204, 204, 0.18), 0 0 25px rgba(0, 204, 204, 0.15);
+    --shadow-lg: 0 8px 32px rgba(0, 204, 204, 0.25), 0 0 40px rgba(0, 204, 204, 0.2);
+    --shadow-xl: 0 12px 48px rgba(0, 204, 204, 0.35), 0 0 60px rgba(0, 204, 204, 0.25);
 }
 
 /* 改善されたアニメーション */
@@ -594,17 +595,17 @@ header .logo a:hover::after {
 
 /* ハンバーガーメニュー */
 .hamburger-menu {
-    display: none;
-    background: none;
-    border: none;
+    display: none; /* デスクトップでは非表示 */
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 204, 204, 0.3);
+    border-radius: 8px;
     cursor: pointer;
     padding: 8px;
     width: 40px;
     height: 40px;
     position: relative;
     z-index: 1001;
-    /* アクセシビリティ改善 */
-    border-radius: 4px;
     transition: var(--fast-transition);
 }
 
@@ -669,7 +670,7 @@ header .logo a:hover::after {
 .talk-videos-page #hero,
 .about-hero,
 .contact-hero {
-    padding: var(--header-height) 20px 0;
+    padding: 0;
     height: 100vh;
     min-height: 700px;
     display: flex;
@@ -680,6 +681,7 @@ header .logo a:hover::after {
     background: var(--base-bg-color);
     position: relative;
     box-sizing: border-box;
+    padding-top: var(--header-height);
 }
 
 .hero-content {
@@ -691,6 +693,10 @@ header .logo a:hover::after {
     z-index: 2;
     animation: fadeInUp 0.8s ease forwards;
     padding: 0 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .hero-content h2 {
@@ -698,10 +704,24 @@ header .logo a:hover::after {
     font-weight: 900;
     margin-bottom: 0.3em;
     color: var(--text-color);
-    text-shadow: 0 0 10px rgba(0, 204, 204, 0.3);
+    text-shadow: 0 0 20px rgba(0, 204, 204, 0.6), 0 0 40px rgba(0, 204, 204, 0.4), 0 0 60px rgba(0, 204, 204, 0.2); /* サイバーパンクなグロー */
     line-height: 1.2;
-    animation: slideInLeft 0.8s ease forwards 0.2s;
+    animation: slideInLeft 0.8s ease forwards 0.2s, cyberGlow 3s ease-in-out infinite 2s; /* グローアニメーション追加 */
     opacity: 0;
+    position: relative;
+}
+
+.hero-content h2::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 48%, rgba(0, 204, 204, 0.1) 50%, transparent 52%);
+    animation: digitalGlitch 0.1s linear infinite;
+    pointer-events: none;
+    opacity: 0.3;
 }
 
 .hero-content p {
@@ -726,33 +746,57 @@ header .logo a:hover::after {
     padding: 18px 40px; 
     border-radius: 50px; 
     text-transform: uppercase; 
-    letter-spacing: 1px; 
+    letter-spacing: 2px; /* サイバーパンクな文字間隔 */
     transition: var(--fast-transition); 
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 0 20px rgba(0, 204, 204, 0.4), inset 0 0 20px rgba(0, 255, 255, 0.1); /* ネオングロー */
     display: inline-flex;
     align-items: center;
     gap: 12px;
     text-decoration: none;
-    border: none;
+    border: 2px solid var(--accent-color);
     cursor: pointer;
     animation: scaleIn 0.6s ease forwards 0.6s;
     opacity: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+    z-index: 1;
+}
+
+.cta-button:hover::before {
+    left: 100%;
 }
 
 .cta-button:hover {
-    background: var(--accent-color-darker);
+    background: var(--base-bg-color);
+    color: var(--accent-color) !important; /* 文字色を強制的に保持 */
+    border-color: var(--accent-color);
     transform: translateY(-3px) scale(1.05);
-    box-shadow: var(--shadow-lg);
-    animation: floatUp 2s ease-in-out infinite;
+    box-shadow: 0 0 30px rgba(0, 204, 204, 0.8), 0 0 60px rgba(0, 204, 204, 0.4), inset 0 0 30px rgba(0, 255, 255, 0.1);
+    text-shadow: 0 0 10px rgba(0, 204, 204, 0.8); /* サイバーパンクなテキストグロー */
 }
 
-.cta-button i {
-    font-size: 1em;
-    transition: var(--fast-transition);
+.cta-button i,
+.cta-button span {
+    position: relative;
+    z-index: 2; /* テキストを前面に */
+    color: inherit;
 }
 
 .cta-button:hover i {
     transform: translateX(5px);
+    color: var(--accent-color);
+    filter: drop-shadow(0 0 5px rgba(0, 204, 204, 0.8));
 }
 
 /* スクロールインジケーター（強化版） */
@@ -1688,195 +1732,159 @@ footer a:hover {
 @media (max-width: 768px) {
     :root { --header-height: 70px; }
     
+    /* ハンバーガーメニューをモバイルで表示 */
     .hamburger-menu {
-        display: block;
-        background: rgba(0, 204, 204, 0.1);
-        border: 1px solid rgba(0, 204, 204, 0.2);
-        border-radius: 8px;
-        backdrop-filter: blur(10px);
-    }
-
-    .hamburger-menu:hover {
-        background: rgba(0, 204, 204, 0.2);
+        display: block !important;
     }
 
     .main-nav {
         position: fixed;
         top: 0;
-        right: -100%;
-        width: 85%;
-        max-width: 350px;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.95);
-        backdrop-filter: blur(30px);
-        padding: 100px 0 30px;
-        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 1000;
-        overflow-y: auto;
-        border-left: 1px solid rgba(0, 204, 204, 0.3);
-    }
-
-    .main-nav.active {
-        right: 0;
-    }
-
-    .main-nav ul {
-    flex-direction: column;
-        align-items: center;
-    gap: 15px;
-        padding: 20px 30px;
-        background: transparent;
-        border: none;
-        backdrop-filter: none;
-        border-radius: 0;
-    }
-
-    .main-nav ul li {
+        left: 0;
         width: 100%;
-        text-align: center;
-    }
-
-    .main-nav ul li a {
-        font-size: 1em;
-        padding: 18px 25px;
-        display: block;
-        border-radius: 15px;
-        background: rgba(0, 204, 204, 0.08);
-        border: 1px solid rgba(0, 204, 204, 0.2);
-        color: var(--text-color);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-weight: 600;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
+        height: 100vh;
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%);
+        backdrop-filter: blur(20px);
+        transform: translateX(-100%);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+    display: flex;
+        align-items: center;
+        justify-content: center;
         overflow: hidden;
     }
 
+    .main-nav.active {
+        transform: translateX(0);
+    }
+
+    .main-nav ul {
+    display: flex;
+        flex-direction: column;
+    align-items: center;
+    justify-content: center;
+        gap: 20px;
+        list-style: none;
+        margin: 0;
+        padding: 40px 0;
+        width: 100%;
+    }
+
+    .main-nav ul li {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .main-nav ul li a {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--text-color);
+        text-decoration: none;
+        padding: 12px 24px;
+        border-radius: 12px;
+        background: rgba(0, 204, 204, 0.08);
+        border: 1px solid rgba(0, 204, 204, 0.2);
+        transition: all 0.3s ease;
+        display: block;
+        text-align: center;
+        min-width: 160px;
+        position: relative;
+        overflow: hidden;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
     .main-nav ul li a::before {
-        background: linear-gradient(135deg, var(--accent-color), var(--accent-color-darker));
-        border-radius: 15px;
-        transform: scale(0);
-        transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(0, 204, 204, 0.3), transparent);
+        transition: left 0.5s;
     }
 
     .main-nav ul li a::after {
-        display: none !important;
+        display: none;
     }
 
     .main-nav ul li a:hover,
     .main-nav ul li a.active {
-        background: transparent;
+        background: rgba(0, 204, 204, 0.2);
         border-color: var(--accent-color);
-        color: var(--base-bg-color);
-        transform: translateY(-3px) scale(1.02);
-        box-shadow: 0 8px 25px rgba(0, 204, 204, 0.3);
+    color: var(--accent-color);
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(0, 204, 204, 0.3);
     }
 
-    .hero-content h2 { font-size: 2.8em; }
-    .hero-content p { font-size: 1.1em; }
+    .main-nav ul li a:hover::before {
+        left: 100%;
+    }
+
+    /* メニューが開いたときのアニメーション */
+    .main-nav.active ul li {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .main-nav.active ul li:nth-child(1) { transition-delay: 0.1s; }
+    .main-nav.active ul li:nth-child(2) { transition-delay: 0.2s; }
+    .main-nav.active ul li:nth-child(3) { transition-delay: 0.3s; }
+    .main-nav.active ul li:nth-child(4) { transition-delay: 0.4s; }
+    .main-nav.active ul li:nth-child(5) { transition-delay: 0.5s; }
+
+    /* ヒーローセクションのモバイル対応強化 */
+    #hero,
+    .music-videos-page #hero,
+    .pr-videos-page #hero,
+    .talk-videos-page #hero,
+    .about-hero,
+    .contact-hero {
+        padding: var(--header-height) 15px 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    text-align: center;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        padding: 0 20px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: auto;
+        min-height: auto;
+    }
+
+    .hero-content h2 { 
+        font-size: 2.8em; 
+        margin-bottom: 0.5em;
+        line-height: 1.1;
+    }
+    
+    .hero-content p { 
+        font-size: 1.1em; 
+        margin-bottom: 30px;
+        max-width: 400px;
+    }
+
+    .cta-button {
+        padding: 15px 30px;
+        font-size: 1rem;
+        margin-top: 10px;
+    }
+
     .section-title { font-size: 2.4em; margin-bottom: 50px; }
     .mv-grid { grid-template-columns: 1fr; gap: 30px; }
     .video-category-section { padding: 80px 0; }
-    
-    .profile-stats {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .profile-section,
-    .contact-form-section,
-    .about-section,
-    .contact-faq {
-        padding: 60px 0;
-    }
-    
-    .contact-form {
-        padding: 30px 20px;
-    }
-    
-    .skills-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .profile-highlights {
-    align-items: center;
-    justify-content: center;
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto;
-    }
-    
-    .highlight-item {
-        justify-content: center !important;
-        text-align: center !important;
-        flex-direction: column !important;
-        gap: 8px !important;
-        padding: 15px 20px !important;
-        border: none !important;
-        align-items: center !important;
-        width: 100% !important;
-        margin: 0 auto !important;
-        display: flex !important;
-}
-
-.highlight-item i {
-        margin-bottom: 5px !important;
-        font-size: 1.2em !important;
-        min-width: auto !important;
-        text-align: center !important;
-        display: block !important;
-        width: auto !important;
-    }
-    
-    .highlight-item span {
-        text-align: center !important;
-        flex: none !important;
-        width: 100% !important;
-        display: block !important;
-        margin: 0 auto !important;
-    }
-    
-    .highlight-item:hover {
-        transform: translateY(-5px) scale(1.02);
-    }
-    
-    .profile-left {
-        text-align: center !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        width: 100% !important;
-    }
-    
-    .profile-basic-info {
-        text-align: center !important;
-        width: 100% !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-    }
-    
-    .contact-faq h2 {
-        font-size: 2em;
-    }
-    
-    .faq-question {
-        padding: 18px 20px;
-    }
-    
-    .faq-question h3 {
-        font-size: 1.1em;
-    }
-    
-    .faq-answer {
-        padding: 0 20px;
-    }
-    
-    .faq-item.active .faq-answer {
-        padding: 18px 20px;
-        max-height: 300px;
-    }
 }
 
 @media (max-width: 480px) {
@@ -1960,7 +1968,7 @@ footer a:hover {
         width: 100% !important;
         margin: 0 auto !important;
         display: flex !important;
-    }
+}
     
     .highlight-item i {
         font-size: 1.1em !important;
@@ -1995,7 +2003,6 @@ footer a:hover {
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
-        justify-content: center !important;
     }
 }
 
@@ -2197,17 +2204,17 @@ body:not(.index-page) .hidden-initially {
 
 /* アクセシビリティとユーザビリティの改善 */
 .hamburger-menu {
-    display: none;
-    background: none;
-    border: none;
+    display: none; /* デスクトップでは非表示 */
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 204, 204, 0.3);
+    border-radius: 8px;
     cursor: pointer;
     padding: 8px;
     width: 40px;
     height: 40px;
     position: relative;
     z-index: 1001;
-    /* アクセシビリティ改善 */
-    border-radius: 4px;
     transition: var(--fast-transition);
 }
 
@@ -2283,8 +2290,9 @@ body:not(.index-page) .hidden-initially {
 }
 
 /* エラー状態のスタイル */
-.form-group input:invalid,
-.form-group textarea:invalid {
+.form-group input.error,
+.form-group textarea.error,
+.form-group select.error {
     border-color: #ff4757;
     box-shadow: 0 0 5px rgba(255, 71, 87, 0.3);
 }
@@ -2360,6 +2368,442 @@ body:not(.index-page) .hidden-initially {
         color: var(--base-bg-color);
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         transform: translateY(-2px);
+    }
+}
+
+/* プロフィールセクションのモバイル対応 */
+    .profile-stats {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .profile-section,
+    .contact-form-section,
+    .about-section,
+    .contact-faq {
+        padding: 60px 0;
+    }
+    
+.contact-form {
+    padding: 30px 20px;
+}
+
+.skills-grid {
+    grid-template-columns: 1fr;
+}
+
+.profile-highlights {
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.highlight-item {
+    justify-content: center !important;
+    text-align: center !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    padding: 15px 20px !important;
+    border: none !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    display: flex !important;
+}
+
+.highlight-item i {
+    margin-bottom: 5px !important;
+    font-size: 1.2em !important;
+    min-width: auto !important;
+    text-align: center !important;
+    display: block !important;
+    width: auto !important;
+}
+
+.highlight-item span {
+    text-align: center !important;
+    flex: none !important;
+    width: 100% !important;
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+.highlight-item:hover {
+    transform: translateY(-5px) scale(1.02);
+}
+
+.profile-left {
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+}
+
+.profile-basic-info {
+    text-align: center !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+.contact-faq h2 {
+    font-size: 2em;
+    }
+    
+    .faq-question {
+    padding: 18px 20px;
+}
+
+.faq-question h3 {
+    font-size: 1.1em; 
+    }
+    
+    .faq-answer {
+        padding: 0 20px;
+    }
+    
+    .faq-item.active .faq-answer {
+    padding: 18px 20px;
+    max-height: 300px;
+}
+
+/* サイバーパンクなグローエフェクト */
+@keyframes cyberGlow {
+    0%, 100% { 
+        text-shadow: 0 0 5px rgba(0, 204, 204, 0.5), 0 0 10px rgba(0, 204, 204, 0.3), 0 0 15px rgba(0, 204, 204, 0.1);
+    }
+    50% { 
+        text-shadow: 0 0 10px rgba(0, 204, 204, 0.8), 0 0 20px rgba(0, 204, 204, 0.6), 0 0 30px rgba(0, 204, 204, 0.4);
+    }
+}
+
+@keyframes digitalGlitch {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-1px, 1px); }
+    40% { transform: translate(-1px, -1px); }
+    60% { transform: translate(1px, 1px); }
+    80% { transform: translate(1px, -1px); }
+}
+
+/* Privacy Policy ページのスタイル */
+.privacy-page {
+    background-color: var(--base-bg-color);
+}
+
+.privacy-main {
+    padding-top: 0;
+}
+
+.privacy-hero {
+    padding: var(--header-height) 20px 0;
+    height: 60vh;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: var(--base-bg-color);
+    position: relative;
+    box-sizing: border-box;
+}
+
+.privacy-content {
+    padding: 80px 0;
+    background: var(--secondary-bg-color);
+}
+
+.policy-content {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(0, 204, 204, 0.05);
+    border: 1px solid rgba(0, 204, 204, 0.2);
+    border-radius: 20px;
+    padding: 40px;
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.policy-content h3 {
+    font-size: 2.2em;
+    color: var(--accent-color);
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 2px solid rgba(0, 204, 204, 0.3);
+    padding-bottom: 20px;
+}
+
+.policy-content h3 i {
+    font-size: 0.8em;
+}
+
+.policy-content > p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: var(--text-color-light);
+    margin-bottom: 40px;
+}
+
+.policy-section {
+    margin-bottom: 35px;
+    padding: 25px;
+    background: rgba(0, 204, 204, 0.03);
+    border-left: 4px solid var(--accent-color);
+    border-radius: 10px;
+    transition: var(--normal-transition);
+}
+
+.policy-section:hover {
+    background: rgba(0, 204, 204, 0.08);
+    transform: translateX(5px);
+}
+
+.policy-section h4 {
+    font-size: 1.4em;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.policy-section h4 i {
+    font-size: 1em;
+    color: var(--accent-color);
+}
+
+.policy-section p {
+    color: var(--text-color-light);
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.policy-section ul {
+    color: var(--text-color-light);
+    line-height: 1.7;
+    padding-left: 20px;
+}
+
+.policy-section ul li {
+    margin-bottom: 8px;
+    position: relative;
+}
+
+.policy-section ul li::before {
+    content: '▸';
+    color: var(--accent-color);
+    position: absolute;
+    left: -15px;
+}
+
+.policy-footer {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 2px solid rgba(0, 204, 204, 0.3);
+    text-align: center;
+}
+
+.policy-footer .update-date {
+    font-size: 0.9em;
+    color: var(--text-color-dark);
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.policy-footer .company-name {
+    font-family: var(--title-font);
+    font-size: 1.2em;
+    color: var(--accent-color);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* プライバシーポリシーページのモバイル対応 */
+@media (max-width: 768px) {
+    .privacy-hero {
+        min-height: 300px;
+        height: 50vh;
+    }
+    
+    .privacy-content {
+        padding: 60px 0;
+    }
+    
+    .policy-content {
+        padding: 25px 20px;
+        margin: 0 10px;
+    }
+    
+    .policy-content h3 {
+        font-size: 1.8em;
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .policy-section {
+        padding: 20px 15px;
+    }
+    
+    .policy-section h4 {
+        font-size: 1.2em;
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .policy-content {
+        padding: 20px 15px;
+        margin: 0 5px;
+    }
+    
+    .policy-content h3 {
+        font-size: 1.5em;
+    }
+    
+    .policy-section {
+        padding: 15px;
+    }
+    
+    .policy-section h4 {
+        font-size: 1.1em;
+    }
+    
+    .policy-section ul {
+        padding-left: 15px;
+    }
+}
+
+/* About Hero セクション専用の修正 */
+.about-hero {
+    padding: 0;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: var(--base-bg-color);
+    position: relative;
+    box-sizing: border-box;
+    padding-top: var(--header-height);
+}
+
+.about-hero .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.about-hero .hero-content {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    animation: fadeInUp 0.8s ease forwards;
+    padding: 0 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-hero .hero-content h2 {
+    font-size: 3.5em;
+    font-weight: 900;
+    margin-bottom: 0.3em;
+    color: var(--text-color);
+    text-shadow: 0 0 20px rgba(0, 204, 204, 0.6), 0 0 40px rgba(0, 204, 204, 0.4), 0 0 60px rgba(0, 204, 204, 0.2);
+    line-height: 1.2;
+    animation: slideInLeft 0.8s ease forwards 0.2s, cyberGlow 3s ease-in-out infinite 2s;
+    opacity: 0;
+    position: relative;
+}
+
+.about-hero .hero-content p {
+    font-size: 1.3em;
+    color: var(--text-color-light);
+    margin-bottom: 35px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+    animation: slideInRight 0.8s ease forwards 0.4s;
+    opacity: 0;
+    font-weight: 500;
+    text-shadow: 0 0 10px rgba(0, 204, 204, 0.3);
+}
+
+/* モバイル対応でAbout Hero確実中央配置 */
+@media (max-width: 768px) {
+    .about-hero {
+        padding: var(--header-height) 15px 0 !important;
+        min-height: 100vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+    
+    .about-hero .container {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+        height: 100% !important;
+    }
+
+    .about-hero .hero-content {
+        max-width: 100% !important;
+        padding: 0 20px !important;
+        margin: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    .about-hero .hero-content h2 { 
+        font-size: 2.8em !important; 
+        margin-bottom: 0.5em !important;
+        line-height: 1.1 !important;
+    }
+    
+    .about-hero .hero-content p { 
+        font-size: 1.1em !important; 
+        margin-bottom: 30px !important;
+        max-width: 400px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-hero .hero-content h2 { 
+        font-size: 2.2em !important; 
+    }
+    
+    .about-hero .hero-content p { 
+        font-size: 1em !important; 
     }
 }
 
